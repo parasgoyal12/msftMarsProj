@@ -114,7 +114,7 @@ table tr td:last-child {
       #sidebar .field ul li:last-child {
         border-right: none; }
   #sidebar .field .starting_player_choices ul li {
-    width: 33.333%;
+    width: 50%;
     text-align: center; }
   #sidebar .field .modes_choices ul li {
     width: 50%;
