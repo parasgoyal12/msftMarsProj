@@ -22,10 +22,10 @@ mode.addEventListener('click',e=>{
             selected_mode=0;
         }
     }
-    if(selected_mode===1){depth.style.display='none';starting_player.innerHTML='<em>X begins first</em>';}
+    if(selected_mode===1){depth.style.display='none';starting_player.innerHTML='<label>::X begins first</label>';}
     else {
         depth.style.display='block';
-        starting_player.innerHTML='<ul><li data-value="1" class="active">Player[X]</li><li data-value="2">AI[O]</li></ul>';
+        starting_player.innerHTML='<ul><li data-value="1" class="active">Player&nbsp;[X]</li><li data-value="2">AI&nbsp;[O]</li></ul>';
     }
     
 });
