@@ -18,7 +18,7 @@ mode.addEventListener('click',e=>{
             selected_mode=0;
         }
     }
-    if(selected_mode===1){depth.style.display='none';starting_player.innerHTML='<label>::X begins first</label>';}
+    if(selected_mode===1){depth.style.display='none';starting_player.innerHTML='<ul><li data-value="1" class="active">Player&nbsp;[X]</li><li data-value="2">Player&nbsp;[O]</li></ul>';}
     else {
         depth.style.display='block';
         starting_player.innerHTML='<ul><li data-value="1" class="active">Player&nbsp;[X]</li><li data-value="2">AI&nbsp;[O]</li></ul>';
