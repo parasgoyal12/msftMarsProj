@@ -2,12 +2,8 @@ board=document.querySelector('.board');
 mode=document.querySelector('.modes_choices');
 depth=document.querySelector('.dpt-choices');
 starting_player=document.querySelector('.starting_player_choices');
-board.addEventListener('click',e=>{
-    if(e.target.tagName==='TD'){
-        e.target.innerText='X';
-    }
 
-});
+
 selected_mode=0;
 mode.addEventListener('click',e=>{
     if(e.target.tagName==="LI"){
@@ -37,18 +33,18 @@ depth.addEventListener('click',e=>{
         elements.forEach(item=>{item.classList.remove('active');
     });
     e.target.classList.add('active');
-    depth_selected=e.target.getAttribute('data-value');
+    depth_selected=Number(e.target.getAttribute('data-value'));
     }
 });
 
-start=1;
+turn=1;
 starting_player.addEventListener('click',e=>{
     if( e.target.tagName==='LI'){
         elements=Array.from(e.target.parentElement.children);
         elements.forEach(item=>{item.classList.remove('active');
     });
     e.target.classList.add('active');
-    start=e.target.getAttribute('data-value');
+    turn=Number(e.target.getAttribute('data-value'));
     }
 });
 
@@ -60,3 +56,32 @@ const clear_board=()=>{
 };
 
 document.querySelector('#newgame').addEventListener('click',clear_board);
+
+const check_board= state=>{
+    //Complete Me
+}
+
+board_state=Array(9).fill(" ");
+board.addEventListener('click',e=>{
+    if(e.target.tagName==='TD'){
+        if(e.target.innerText==='X' || e.target.innerText==='O'){
+            console.log('error!Invalid Move')
+        }
+        else{
+            if(turn===1){
+                e.target.innerText='X';
+                board_state[Number(e.target.id)]='X';
+                turn=0;
+            }
+            else{
+                e.target.innerText='O';
+                board_state[Number(e.target.id)]='O';
+                turn=1;
+            }
+        }
+
+        // console.log(board_state);
+    }
+
+});
+
