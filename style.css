@@ -6,7 +6,8 @@ td {
 	vertical-align:  middle;
 	font-family:  "Comic Sans MS", cursive, sans-serif;
 	font-size:  70px;
-	cursor: pointer;
+  cursor: pointer;
+  color:#ffffff;
 }
 
 table tr:first-child td {
@@ -30,7 +31,8 @@ table tr td:last-child {
   height: 165px;
   margin: 10px;
   font-size: 100px;
-  color: black;
+  font-family:cursive;
+  color: whitesmoke;
   text-align: center;
   line-height: 200px;
 }

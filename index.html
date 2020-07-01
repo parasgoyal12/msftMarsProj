@@ -16,35 +16,38 @@
 	<div id="sidebar_wrap">
 		<div id="sidebar">
 			<div class="field">
+				<label>Select Mode</label>
+				<div class="modes_choices" id="select_mode">
+					<ul>
+						<li data-value="1" >Two Players</li>
+						<li data-value="0" class="active">Player vs AI</li>
+					</ul>
+				</div>
+			</div>
+			
+			
+			<div class="field dpt-choices">
 				<label>Depth</label>
 				<div class="depth_choices" id="depth">
 					<ul>
-						<li data-value="1"><em>1</em></li>
-						<li data-value="2"><em>2</em></li>
-						<li data-value="3"><em>3</em></li>
-						<li data-value="4"><em>4</em></li>
-						<li data-value="-1" class="active"><em>Unlimited</em></li>
+						<li data-value="1">1</li>
+						<li data-value="2">2</li>
+						<li data-value="3">3</li>
+						<li data-value="4">4</li>
+						<li data-value="5" class="active">Unlimited</li>
 					</ul>
 				</div>
 			</div>
 
-			<div class="field">
-				<label>Select Mode</label>
-				<div class="modes_choices" id="select_mode">
-					<ul>
-						<li data-value="1" class="active"><em>Two Players</em></li>
-						<li data-value="0"><em>Player vs AI</em></li>
-					</ul>
-				</div>
-			</div>
+			
 
 			<div class="field">
 				<label>Starting Player</label>
 				<div class="starting_player_choices" id="starting_player">
 					<ul>
-						<li data-value="1" class="active"><em>P1</em></li>
-						<li data-value="2"><em>P2</em></li>
-						<li data-value="2"><em>AI</em></li>	
+						<li data-value="1" class="active">Player[X]</li>
+						<!-- <li data-value="2"><em>P2</em></li> -->
+						<li data-value="2">AI[O]</li>	
 					</ul>
 				</div>
 			</div>
@@ -57,21 +60,21 @@
 <!-- TIC TAC TOE BORAD -->
 	<div id="main">
 	<div class="container-fluid">
-		<table>
+		<table class='board'>
 			<tr>
-				<td class="cell" id="0"></td>
-				<td class="cell" id="1"></td>
-				<td class="cell" id="2"></td>
+				<td class="cell" id="0"> </td>
+				<td class="cell" id="1"> </td>
+				<td class="cell" id="2"> </td>
 			</tr>
 			<tr>
-				<td class="cell" id="3"></td>
-				<td class="cell" id="4"></td>
-				<td class="cell" id="5"></td>
+				<td class="cell" id="3"> </td>
+				<td class="cell" id="4"> </td>
+				<td class="cell" id="5"> </td>
 			</tr>
 			<tr>
-				<td class="cell" id="6"></td>
-				<td class="cell" id="7"></td>
-				<td class="cell" id="8"></td>
+				<td class="cell" id="6"> </td>
+				<td class="cell" id="7"> </td>
+				<td class="cell" id="8"> </td>
 			</tr>
 		</table>
 	</div>
@@ -80,6 +83,6 @@
 
 </div>
 
-  <!-- <script src="script.js"></script> -->
+  <script src="script.js"></script>
 </body>
 </html>
