@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>TIC TAC TOE</title>
+  
+  <link rel="stylesheet" href="style.css">
+  <link rel='stylesheet prefetch' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css'>
+</head>
+
+<body>
+<div id="container">
+
+<!-- SIDE MENU -->
+	<div id="sidebar_wrap">
+		<div id="sidebar">
+			<div class="field">
+				<label>Depth</label>
+				<div class="depth_choices" id="depth">
+					<ul>
+						<li data-value="1"><em>1</em></li>
+						<li data-value="2"><em>2</em></li>
+						<li data-value="3"><em>3</em></li>
+						<li data-value="4"><em>4</em></li>
+						<li data-value="-1" class="active"><em>Unlimited</em></li>
+					</ul>
+				</div>
+			</div>
+
+			<div class="field">
+				<label>Select Mode</label>
+				<div class="modes_choices" id="select_mode">
+					<ul>
+						<li data-value="1" class="active"><em>Two Players</em></li>
+						<li data-value="0"><em>Player vs AI</em></li>
+					</ul>
+				</div>
+			</div>
+
+			<div class="field">
+				<label>Starting Player</label>
+				<div class="starting_player_choices" id="starting_player">
+					<ul>
+						<li data-value="1" class="active"><em>P1</em></li>
+						<li data-value="2"><em>P2</em></li>
+						<li data-value="2"><em>AI</em></li>	
+					</ul>
+				</div>
+			</div>
+
+			<button id="newgame"><em>New Game</em></button>
+		</div>
+	</div>
+
+
+<!-- TIC TAC TOE BORAD -->
+	<div id="main">
+	<div class="container-fluid">
+		<table>
+			<tr>
+				<td class="cell" id="0"></td>
+				<td class="cell" id="1"></td>
+				<td class="cell" id="2"></td>
+			</tr>
+			<tr>
+				<td class="cell" id="3"></td>
+				<td class="cell" id="4"></td>
+				<td class="cell" id="5"></td>
+			</tr>
+			<tr>
+				<td class="cell" id="6"></td>
+				<td class="cell" id="7"></td>
+				<td class="cell" id="8"></td>
+			</tr>
+		</table>
+	</div>
+	</div>
+
+
+</div>
+
+  <!-- <script src="script.js"></script> -->
+</body>
+</html>
