@@ -39,6 +39,7 @@ depth.addEventListener('click',e=>{
 
 turn=1;
 starting_player.addEventListener('click',e=>{
+    
     if( e.target.tagName==='LI'){
         elements=Array.from(e.target.parentElement.children);
         elements.forEach(item=>{item.classList.remove('active');
@@ -46,6 +47,7 @@ starting_player.addEventListener('click',e=>{
     e.target.classList.add('active');
     turn=Number(e.target.getAttribute('data-value'));
     }
+    clear_board();
 });
 
 const clear_board=()=>{
