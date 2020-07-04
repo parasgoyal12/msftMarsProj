@@ -55,6 +55,17 @@ class Board{
         //return false otherwise
         return false;
     }
+    indicateWinner(result){
+        if(result.direction==='H'){
+            Array.from(document.querySelector(`.ROW${result.row}`).children).forEach(item=>item.classList.add('winCol'));
+        }
+        else if(result.direction==="V"){
+            document.querySelectorAll(`.COL${result.row}`).forEach(item=>item.classList.add('winCol'));
+        }
+        else{
+            document.querySelectorAll(`.DIAG${result.row}`).forEach(item=>item.classList.add('winCol'));
+        }
+    }
     insert(symbol, position) {
         if(position > 8 || this.state[position]) return false; //Cell is either occupied or does not exist
         this.state[position] = symbol;
@@ -140,6 +151,8 @@ document.querySelector('#newgame').addEventListener('click',()=>{
         item.innerText='\u2800';
     });
     board_state=new Board();
+    document.querySelectorAll(`.cell`).forEach(item=>item.classList.remove('winCol'));
+    // }
 });
 
 message_box=document.querySelector('.message');
@@ -149,13 +162,14 @@ board.addEventListener('click',e=>{
         if(turn===1){
             if(!board_state.isTerminal()&&board_state.insert('X',e.target.id)){
             e.target.innerText='X';
-            e.target.style.color = "blue";
+            
             if(board_state.isTerminal()){
                 message_box.textContent=`X Wins!!`;
+                board_state.indicateWinner(board_state.isTerminal());
                 // console.log(board_state.isTerminal().direction);
             }else{
             turn=0;
-            message_box.textContent="O turn!!"}
+            message_box.textContent="O turn!!";}
             }
             else{
                 message_box.textContent="Error! Invalid Move"
@@ -166,7 +180,10 @@ board.addEventListener('click',e=>{
         else{
             if(!board_state.isTerminal()&&board_state.insert('O',e.target.id)){
             e.target.innerText='O';
-            if(board_state.isTerminal())message_box.textContent=`O Wins!!`;
+            if(board_state.isTerminal()){
+                message_box.textContent=`O Wins!!`;
+                board_state.indicateWinner(board_state.isTerminal());
+            }
             else{
             turn=1;
             message_box.textContent="X turn!";}
