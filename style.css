@@ -53,9 +53,11 @@ table {
 }
 
 .message {
-  font-size: 20px;
-  color: purple;
-  padding-top: 5px;
+  font-size: 2em;
+  color: #ffffff;
+  padding-top: 3em;
+  text-align: center;
+  font-family:'Permanent Marker', cursive;
 }
 
 /* img {

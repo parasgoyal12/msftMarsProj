@@ -137,7 +137,7 @@ document.querySelector('#newgame').addEventListener('click',()=>{
     selected_mode=Number(mode.querySelector('.active').getAttribute('data-value'));
     elements=board.querySelectorAll('.cell');
     elements.forEach(item=>{
-        item.innerText=' ';
+        item.innerText='\u2800';
     });
     board_state=new Board();
 });
