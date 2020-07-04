@@ -75,28 +75,33 @@ depth=document.querySelector('.dpt-choices');
 starting_player=document.querySelector('.starting_player_choices');
 
 
-selected_mode=0;
+let selected_mode=0;
+let turn=1;
+let depth_selected=5;
+
 mode.addEventListener('click',e=>{
+    let temp=selected_mode;
     if(e.target.tagName==="LI"){
         e.target.classList.add('active');
         if(e.target.getAttribute('data-value')==='1'){
-            
             e.target.nextElementSibling.classList.remove('active');
-            selected_mode=1;
+            temp=1;
         }
+            // selected_mode=1;
         else{
             e.target.previousElementSibling.classList.remove('active');
-            selected_mode=0;
+            temp=0;
         }
+            // selected_mode=0;
     }
-    if(selected_mode===1){depth.style.display='none';starting_player.innerHTML='<ul><li data-value="1" class="active">Player&nbsp;[X]</li><li data-value="2">Player&nbsp;[O]</li></ul>';}
+    if(temp===1){depth.style.display='none';starting_player.innerHTML='<ul><li data-value="1" class="active">Player&nbsp;[X]</li><li data-value="2">Player&nbsp;[O]</li></ul>';}
     else {
         depth.style.display='block';
         starting_player.innerHTML='<ul><li data-value="1" class="active">Player&nbsp;[X]</li><li data-value="2">AI&nbsp;[O]</li></ul>';
     }
     
 });
-depth_selected=5;
+
 
 depth.addEventListener('click',e=>{
     if( e.target.tagName==='LI'){
@@ -104,11 +109,11 @@ depth.addEventListener('click',e=>{
         elements.forEach(item=>{item.classList.remove('active');
     });
     e.target.classList.add('active');
-    depth_selected=Number(e.target.getAttribute('data-value'));
+    // depth_selected=Number(e.target.getAttribute('data-value'));
     }
 });
 
-turn=1;
+
 starting_player.addEventListener('click',e=>{
     
     if( e.target.tagName==='LI'){
@@ -116,31 +121,29 @@ starting_player.addEventListener('click',e=>{
         elements.forEach(item=>{item.classList.remove('active');
     });
     e.target.classList.add('active');
-    turn=Number(e.target.getAttribute('data-value'));
+    // turn=Number(e.target.getAttribute('data-value'));
     }
-    clear_board();
+    // clear_board();
     
 });
 
-const clear_board=()=>{
+
+
+document.querySelector('#newgame').addEventListener('click',()=>{
+    turn=Number(starting_player.querySelector('.active').getAttribute('data-value'));
+    depth_selected=Number(depth.querySelector('.active').getAttribute('data-value'));
+    selected_mode=Number(mode.querySelector('.active').getAttribute('data-value'));
     elements=board.querySelectorAll('.cell');
     elements.forEach(item=>{
         item.innerText=' ';
     });
     board_state=new Board();
-};
-
-document.querySelector('#newgame').addEventListener('click',clear_board);
+});
 
 
 board_state=new Board();
 board.addEventListener('click',e=>{
     if(e.target.tagName==='TD'){
-        // if(e.target.innerText==='X' || e.target.innerText==='O'){
-        //     console.log('error!Invalid Move')
-        // }
-        // else{
-            // console.log('Hello');
         if(turn===1){
             if(!board_state.isTerminal()&&board_state.insert('X',e.target.id)){
             e.target.innerText='X';
@@ -150,6 +153,7 @@ board.addEventListener('click',e=>{
             else{
                 console.log("Error! Invalid Move")
             }
+            //Add AI Agent Here!!
         }
         else{
             if(!board_state.isTerminal()&&board_state.insert('O',e.target.id)){
@@ -161,9 +165,6 @@ board.addEventListener('click',e=>{
                 console.log("Error");
             }
         }
-        
-
     }
-
 });
 
