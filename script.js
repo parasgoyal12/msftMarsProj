@@ -147,7 +147,11 @@ board.addEventListener('click',e=>{
         if(turn===1){
             if(!board_state.isTerminal()&&board_state.insert('X',e.target.id)){
             e.target.innerText='X';
-            if(board_state.isTerminal())console.log(`X Wins!!`);
+            e.target.style.color = "blue";
+            if(board_state.isTerminal()){
+                console.log(`X Wins!!`);
+                // console.log(board_state.isTerminal().direction);
+            }
             turn=0;
             }
             else{

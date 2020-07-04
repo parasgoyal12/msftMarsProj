@@ -37,23 +37,21 @@ table tr td:last-child {
   line-height: 200px;
 }
 
-#main{
-  margin-top: 0px;
-  min-height: 100%;
-  min-height: 100vh;
-  display: flex;
-  background-color: black;
-  margin-left: 700px;
-
-  padding-top: 250px;
-}
-
 table {
   width: 460px;
   height: 460px;
   float: left;
   position: relative;
-  margin-left: 325px;
+  margin-top: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.message {
+  font-size: 20px;
+  color: purple;
+  padding-top: 5px;
 }
 
 /* img {
@@ -75,6 +73,15 @@ table {
     align-items: center;
     justify-content: center;
     background-color: #ffffff; }
+  #container #main{
+    margin-top: 0px;
+    min-height: 100%;
+    min-height: 100vh;
+    display: flex;
+    background-color: black;
+    justify-content: center;
+    margin-left: 700px;
+}
 
 #newgame {
   background-color: #52d29d;
