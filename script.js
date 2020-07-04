@@ -163,14 +163,10 @@ board.addEventListener('click',e=>{
             if(!board_state.isTerminal()&&board_state.insert('X',e.target.id)){
             e.target.innerText='X';
             
-            if(board_state.isTerminal()){
-                message_box.textContent=`X Wins!!`;
-                board_state.indicateWinner(board_state.isTerminal());
-                // console.log(board_state.isTerminal().direction);
-            }else{
+            
             turn=0;
             message_box.textContent="O turn!!";}
-            }
+            
             else{
                 message_box.textContent="Error! Invalid Move"
                 // console.log("Error! Invalid Move")
@@ -180,18 +176,20 @@ board.addEventListener('click',e=>{
         else{
             if(!board_state.isTerminal()&&board_state.insert('O',e.target.id)){
             e.target.innerText='O';
-            if(board_state.isTerminal()){
-                message_box.textContent=`O Wins!!`;
-                board_state.indicateWinner(board_state.isTerminal());
-            }
-            else{
+            
             turn=1;
             message_box.textContent="X turn!";}
-            }
+            
             else{
                 message_box.textContent="Error!Invalid Move";
                 // console.log("Error");
             }
+        }
+        if(board_state.isTerminal()){
+            let result=board_state.isTerminal()
+            message_box.textContent=(result.winner==='draw')?"Game Drawn":`${result.winner} Wins!!`;
+            board_state.indicateWinner(board_state.isTerminal());
+            // console.log(board_state.isTerminal().direction);
         }
     }
 });
