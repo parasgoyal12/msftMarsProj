@@ -131,6 +131,8 @@ starting_player.addEventListener('click',e=>{
 
 document.querySelector('#newgame').addEventListener('click',()=>{
     turn=Number(starting_player.querySelector('.active').getAttribute('data-value'));
+    if(turn===1)message_box.textContent="X Turn";
+    else message_box.textContent="O Turn";
     depth_selected=Number(depth.querySelector('.active').getAttribute('data-value'));
     selected_mode=Number(mode.querySelector('.active').getAttribute('data-value'));
     elements=board.querySelectorAll('.cell');
@@ -140,7 +142,7 @@ document.querySelector('#newgame').addEventListener('click',()=>{
     board_state=new Board();
 });
 
-
+message_box=document.querySelector('.message');
 board_state=new Board();
 board.addEventListener('click',e=>{
     if(e.target.tagName==='TD'){
@@ -149,24 +151,29 @@ board.addEventListener('click',e=>{
             e.target.innerText='X';
             e.target.style.color = "blue";
             if(board_state.isTerminal()){
-                console.log(`X Wins!!`);
+                message_box.textContent=`X Wins!!`;
                 // console.log(board_state.isTerminal().direction);
-            }
+            }else{
             turn=0;
+            message_box.textContent="O turn!!"}
             }
             else{
-                console.log("Error! Invalid Move")
+                message_box.textContent="Error! Invalid Move"
+                // console.log("Error! Invalid Move")
             }
             //Add AI Agent Here!!
         }
         else{
             if(!board_state.isTerminal()&&board_state.insert('O',e.target.id)){
             e.target.innerText='O';
-            if(board_state.isTerminal())console.log(`O Wins!!`);
+            if(board_state.isTerminal())message_box.textContent=`O Wins!!`;
+            else{
             turn=1;
+            message_box.textContent="X turn!";}
             }
             else{
-                console.log("Error");
+                message_box.textContent="Error!Invalid Move";
+                // console.log("Error");
             }
         }
     }
