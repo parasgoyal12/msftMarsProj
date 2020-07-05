@@ -1,7 +1,8 @@
 td {
-	border:  2px solid #fff;
-	height:  100px;
-	width:  100px;
+	border:  3px solid #fff;
+  border-style: groove;
+/* 	height:  100px;
+	width:  100px; */
 	text-align:  center;
 	vertical-align:  middle;
 	font-family:  "Comic Sans MS", cursive, sans-serif;
@@ -27,8 +28,8 @@ table tr td:last-child {
 }
 
 .cell{
-  width: 165px;
-  height: 165px;
+  width: 180px;
+  height: 150px;
   margin: 10px;
   font-size: 100px;
   font-family: 'Permanent Marker', cursive;
@@ -42,14 +43,22 @@ table tr td:last-child {
 }
 
 table {
-  width: 460px;
+/*   width: 460px;
   height: 460px;
   float: left;
   position: relative;
   margin-top: 200px;
   display: flex;
   align-items: center;
+  justify-content: center; */
+
+  margin-top: 60px;
+  min-height: 100%;
+  min-height: 100vh;
+  display: flex;
+  background-color: black;
   justify-content: center;
+  margin-left: 5px;
 }
 
 .message {
