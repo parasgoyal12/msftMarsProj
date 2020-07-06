@@ -58,7 +58,7 @@ table {
   min-height: 100%;
   min-height: 100vh;
   display: flex;
-  background-color: black;
+  background-color: #303133;
   justify-content: center;
   margin-left: 5px;
 }
@@ -80,7 +80,9 @@ table {
   height: 100%;
   overflow: hidden;
   position: relative;
-  padding: 0px; }
+  padding: 0px; 
+  background-color: #8a676e;
+  background-image: url("white.jpg");}
   #container #sidebar_wrap {
     margin-top: 200px;
     width: 35%;
@@ -89,27 +91,28 @@ table {
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: #ffffff; }
+    /* background-color: #ffffff; */
+     }
   #container #main{
     margin-top: 0px;
     min-height: 100%;
     min-height: 100vh;
     display: flex;
-    background-color: black;
+    background-color: #303133;
     justify-content: center;
     margin-left: 700px;
 }
 
 #newgame {
-  background-color: #52d29d;
+  background-color: #52a2b3;
   border: none;
   padding: 13px 26px;
-  border-radius: 2px;
-  color: #fff;
-  /* font-family: 'Gloria Hallelujah', cursive; */
+  border-radius: 10px;
+  color: #e4e4eb;
+  font-family: 'Merienda One', cursive;
   cursor: pointer;
   font-weight: 600;
-  font-size: 18px;
+  font-size: 20px;
   width: 100%;
   margin-top: 10px; }
 
@@ -119,23 +122,23 @@ table {
     margin: 0;
     padding: 0;
     list-style: none;
-    border: 1px solid #8c8c8c;
+    border: 2px solid #303133;
     border-radius: 2px;
     overflow: hidden;
     font-size: 20px;
-    font-family: Arial, Helvetica, sans-serif; }
+    font-family: 'Merienda One', cursive; }
     #sidebar .field ul li {
       float: left;
       padding: 10px 15px;
-      border-right: 1px solid #8c8c8c;
+      border-right: 2px solid #303133;
       cursor: pointer;
-      color: #8c8c8c; }
+      color: #303133; }
       #sidebar .field ul li:hover {
-        background-color: #b7b7b7;
-        color: #fff; }
+        background-color: #303133;
+        color: #e4e4eb; }
       #sidebar .field ul li.active {
-        background-color: #8c8c8c;
-        color: #fff; }
+        background-color: #5c5758;
+        color: #e4e4eb; }
       #sidebar .field ul li:last-child {
         border-right: none; }
   #sidebar .field .starting_player_choices ul li {
@@ -146,13 +149,10 @@ table {
     text-align: center; }
   #sidebar .field label {
     font-weight: 800;
-    font-size: 18px;
+    font-size: 22px;
     margin-bottom: 15px;
-    display: block; }
-
-
-
-
-
+    display: block;
+    font-family: 'Merienda One', cursive;
+    color: #1685a1; }
 
 
