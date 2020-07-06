@@ -253,7 +253,7 @@ board.addEventListener('click',e=>{
                 // console.log("Error! Invalid Move")
             }
             // board_state.printFormattedBoard();
-            // console.log(p.max_depth);
+            console.log(p.max_depth);
             if(selected_mode===0)
             p.getBestMove(board_state,!maximizing,best=>{
                 
