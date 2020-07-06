@@ -222,7 +222,8 @@ document.querySelector('#newgame').addEventListener('click',()=>{
     p=new Player(depth_selected);
     
     document.querySelectorAll(`.cell`).forEach(item=>item.classList.remove('winCol'));
-    if(selected_mode===0&&turn!=0){
+    if(selected_mode===0&&turn!==1){
+        console.log(turn,selected_mode);
         let centers_and_corners=[0,2,4,6,8];
         let first_choice=centers_and_corners[Math.floor(Math.random()*centers_and_corners.length)];
         board_state.insert('O',first_choice);
