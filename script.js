@@ -2,17 +2,17 @@ class Board{
     constructor(state=Array(9).fill('')){
         this.state=state;
     }
-    printFormattedBoard() {
-        let formattedString = '';
-        this.state.forEach((cell, index) => {
-            formattedString += cell ? ` ${cell} |` : '   |';
-            if((index + 1) % 3 == 0)  {
-                formattedString = formattedString.slice(0,-1);
-                if(index < 8) formattedString += '\n\u2015\u2015\u2015 \u2015\u2015\u2015 \u2015\u2015\u2015\n';
-            }
-        });
-        console.log('%c' + formattedString, 'color: #6d4e42;font-size:16px');
-    }
+    // printFormattedBoard() {
+    //     let formattedString = '';
+    //     this.state.forEach((cell, index) => {
+    //         formattedString += cell ? ` ${cell} |` : '   |';
+    //         if((index + 1) % 3 == 0)  {
+    //             formattedString = formattedString.slice(0,-1);
+    //             if(index < 8) formattedString += '\n\u2015\u2015\u2015 \u2015\u2015\u2015 \u2015\u2015\u2015\n';
+    //         }
+    //     });
+    //     console.log('%c' + formattedString, 'color: #6d4e42;font-size:16px');
+    // }
     isEmpty(){
         return this.state.every(cell=>!cell);
     }
@@ -223,7 +223,7 @@ document.querySelector('#newgame').addEventListener('click',()=>{
     
     document.querySelectorAll(`.cell`).forEach(item=>item.classList.remove('winCol'));
     if(selected_mode===0&&turn!==1){
-        console.log(turn,selected_mode);
+        // console.log(turn,selected_mode);
         let centers_and_corners=[0,2,4,6,8];
         let first_choice=centers_and_corners[Math.floor(Math.random()*centers_and_corners.length)];
         board_state.insert('O',first_choice);
@@ -247,13 +247,6 @@ board.addEventListener('click',e=>{
             
             turn=0;
             message_box.textContent="O turn!!";}
-            
-            else{
-                message_box.textContent="Error! Invalid Move"
-                // console.log("Error! Invalid Move")
-            }
-            // board_state.printFormattedBoard();
-            // console.log(p.max_depth);
             if(selected_mode===0)
             p.getBestMove(board_state,!maximizing,best=>{
                 
@@ -262,6 +255,13 @@ board.addEventListener('click',e=>{
                 turn=1;
                 message_box.textContent="X turn!";
             });
+            else{
+                message_box.textContent="Error! Invalid Move"
+                // console.log("Error! Invalid Move")
+            }
+            // board_state.printFormattedBoard();
+            // console.log(p.max_depth);
+            
            }
          else { 
             if(!board_state.isTerminal()&&board_state.insert('O',e.target.getAttribute('data-value'))){
