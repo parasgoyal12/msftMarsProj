@@ -79,6 +79,71 @@ class Board{
         return moves;
     }
 }
+class Player{
+    constructor(max_depth=-1){
+        this.max_depth=max_depth;
+        this.nodes_map=new Map();
+    }
+    getBestMove(board,maximizing=true,callback=()=>{},depth=0){
+        if(board.constructor.name !== "Board") throw('The first argument to the getBestMove method should be an instance of Board class.');
+        if(depth==0)this.nodes_map.clear();
+        if(board.isTerminal()||depth==this.max_depth){
+            if(board.isTerminal().winner==='X')return 100-depth;
+            else if(board.isTerminal().winner==='O')return -100+depth;
+            return 0;
+        } 
+        if(maximizing){
+            let best=-100;
+            board.getAvailableMoves().forEach(index=>{
+                let child=new Board(board.state.slice());
+                child.insert('X',index);
+                let node_value=this.getBestMove(child,false,callback,depth+1);
+                best=Math.max(best,node_value);
+                if(depth == 0) {
+					var moves = this.nodes_map.has(node_value) ? `${this.nodes_map.get(node_value)},${index}` : index;
+					this.nodes_map.set(node_value, moves);
+				}
+            });
+            if(depth == 0) {
+				if(typeof this.nodes_map.get(best) == 'string') {
+					var arr = this.nodes_map.get(best).split(',');
+					var rand = Math.floor(Math.random() * arr.length);
+					var ret = arr[rand];
+				} else {
+					ret = this.nodes_map.get(best);
+				}
+				callback(ret);
+				return ret;
+			}
+			return best;
+        }
+        if(!maximizing){
+            let best = 100;
+			board.getAvailableMoves().forEach(index => {
+				let child = new Board(board.state.slice());
+				child.insert('O', index);
+				let node_value = this.getBestMove(child, true, callback, depth + 1);
+				best = Math.min(best, node_value);
+				if(depth == 0) {
+					var moves = this.nodes_map.has(node_value) ? this.nodes_map.get(node_value) + ',' + index : index;
+					this.nodes_map.set(node_value, moves);
+				}
+			});
+			if(depth == 0) {
+				if(typeof this.nodes_map.get(best) == 'string') {
+					var arr = this.nodes_map.get(best).split(',');
+					var rand = Math.floor(Math.random() * arr.length);
+					var ret = arr[rand];
+				} else {
+					ret = this.nodes_map.get(best);
+				}
+				callback(ret);
+				return ret;
+			}
+			return best;
+        }
+    }
+}
 
 board=document.querySelector('.board');
 mode=document.querySelector('.modes_choices');
@@ -88,8 +153,10 @@ starting_player=document.querySelector('.starting_player_choices');
 
 let selected_mode=0;
 let turn=1;
-let depth_selected=5;
-
+let maximizing=turn;
+let depth_selected=-1;
+p=new Player(depth_selected);
+board_state=new Board();
 mode.addEventListener('click',e=>{
     let temp=selected_mode;
     if(e.target.tagName==="LI"){
@@ -151,7 +218,19 @@ document.querySelector('#newgame').addEventListener('click',()=>{
         item.innerText='\u2800';
     });
     board_state=new Board();
+    if(selected_mode===0)
+    p=new Player(depth_selected);
+    
     document.querySelectorAll(`.cell`).forEach(item=>item.classList.remove('winCol'));
+    if(selected_mode===0&&turn!=0){
+        let centers_and_corners=[0,2,4,6,8];
+        let first_choice=centers_and_corners[Math.floor(Math.random()*centers_and_corners.length)];
+        board_state.insert('O',first_choice);
+        board.querySelector(`#cell${first_choice}`).innerText='O';
+        message_box.textContent="X Turn";
+        // console.log("Hey");
+        turn=1;
+    }
     // }
 });
 
@@ -160,7 +239,8 @@ board_state=new Board();
 board.addEventListener('click',e=>{
     if(e.target.tagName==='TD'){
         if(turn===1){
-            if(!board_state.isTerminal()&&board_state.insert('X',e.target.id)){
+        
+            if(!board_state.isTerminal()&&board_state.insert('X',e.target.getAttribute('data-value'))){
             e.target.innerText='X';
             
             
@@ -171,11 +251,21 @@ board.addEventListener('click',e=>{
                 message_box.textContent="Error! Invalid Move"
                 // console.log("Error! Invalid Move")
             }
-            //Add AI Agent Here!!
-        }
-        else{
-            if(!board_state.isTerminal()&&board_state.insert('O',e.target.id)){
-            e.target.innerText='O';
+            // board_state.printFormattedBoard();
+            // console.log(p.max_depth);
+            if(selected_mode===0)
+            p.getBestMove(board_state,!maximizing,best=>{
+                
+                board_state.insert('O',best);
+                board.querySelector(`#cell${best}`).textContent='O';
+                turn=1;
+                message_box.textContent="X turn!";
+            });
+           }
+         else { 
+            if(!board_state.isTerminal()&&board_state.insert('O',e.target.getAttribute('data-value'))){
+                if(selected_mode===1)
+                    e.target.innerText='O';
             
             turn=1;
             message_box.textContent="X turn!";}
