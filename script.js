@@ -84,7 +84,7 @@ class Player{
         this.max_depth=max_depth;
         this.nodes_map=new Map();
     }
-    getBestMove(board,maximizing=true,callback=()=>{},depth=0){
+    getBestMove(board,maximizing=true,callback=()=>{},depth=0,alpha=-100,beta=100){
         if(board.constructor.name !== "Board") throw('The first argument to the getBestMove method should be an instance of Board class.');
         if(depth==0)this.nodes_map.clear();
         if(board.isTerminal()||depth==this.max_depth){
@@ -94,15 +94,18 @@ class Player{
         } 
         if(maximizing){
             let best=-100;
-            board.getAvailableMoves().forEach(index=>{
+            board.getAvailableMoves().every(index=>{
                 let child=new Board(board.state.slice());
                 child.insert('X',index);
-                let node_value=this.getBestMove(child,false,callback,depth+1);
+                let node_value=this.getBestMove(child,false,callback,depth+1,alpha,beta);
                 best=Math.max(best,node_value);
+                alpha=Math.max(alpha,node_value)
+                if(beta<=alpha)return false;
                 if(depth == 0) {
 					var moves = this.nodes_map.has(node_value) ? `${this.nodes_map.get(node_value)},${index}` : index;
 					this.nodes_map.set(node_value, moves);
-				}
+                }
+                return true;
             });
             if(depth == 0) {
 				if(typeof this.nodes_map.get(best) == 'string') {
@@ -119,15 +122,18 @@ class Player{
         }
         if(!maximizing){
             let best = 100;
-			board.getAvailableMoves().forEach(index => {
+			board.getAvailableMoves().every(index => {
 				let child = new Board(board.state.slice());
 				child.insert('O', index);
-				let node_value = this.getBestMove(child, true, callback, depth + 1);
-				best = Math.min(best, node_value);
+				let node_value = this.getBestMove(child, true, callback, depth + 1,alpha,beta);
+                best = Math.min(best, node_value);
+                beta=Math.min(beta,node_value);
+                if(beta<=alpha)return false;
 				if(depth == 0) {
 					var moves = this.nodes_map.has(node_value) ? this.nodes_map.get(node_value) + ',' + index : index;
 					this.nodes_map.set(node_value, moves);
-				}
+                }
+                return true;
 			});
 			if(depth == 0) {
 				if(typeof this.nodes_map.get(best) == 'string') {
