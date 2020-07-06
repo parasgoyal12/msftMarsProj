@@ -240,21 +240,18 @@ board_state=new Board();
 board.addEventListener('click',e=>{
     if(e.target.tagName==='TD'){
         if(turn===1){
-        
             if(!board_state.isTerminal()&&board_state.insert('X',e.target.getAttribute('data-value'))){
             e.target.innerText='X';
-            
-            
             turn=0;
-            message_box.textContent="O turn!!";}
+            message_box.textContent="O turn!!";
             if(selected_mode===0)
-            p.getBestMove(board_state,!maximizing,best=>{
-                
-                board_state.insert('O',best);
-                board.querySelector(`#cell${best}`).textContent='O';
-                turn=1;
-                message_box.textContent="X turn!";
-            });
+            p.getBestMove(board_state,!maximizing,best=>{ 
+                    board_state.insert('O',best);
+                    board.querySelector(`#cell${best}`).textContent='O';
+                    turn=1;
+                    message_box.textContent="X turn!";
+                });
+            }
             else{
                 message_box.textContent="Error! Invalid Move"
                 // console.log("Error! Invalid Move")
