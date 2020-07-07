@@ -226,7 +226,7 @@ document.querySelector('#newgame').addEventListener('click',()=>{
     board_state=new Board();
     if(selected_mode===0)
     p=new Player(depth_selected);
-    
+    console.log(p.max_depth);
     document.querySelectorAll(`.cell`).forEach(item=>item.classList.remove('winCol'));
     if(selected_mode===0&&turn!==1){
         // console.log(turn,selected_mode);
