@@ -92,62 +92,54 @@ class Player{
             else if(board.isTerminal().winner==='O')return -100+depth;
             return 0;
         } 
+        let best;
         if(maximizing){
-            let best=-100;
+            best=-100;
             board.getAvailableMoves().every(index=>{
                 let child=new Board(board.state.slice());
                 child.insert('X',index);
                 let node_value=this.getBestMove(child,false,callback,depth+1,alpha,beta);
                 best=Math.max(best,node_value);
-                alpha=Math.max(alpha,node_value)
-                if(beta<=alpha)return false;
+                // alpha=Math.max(alpha,best)
+                // if(beta<=alpha)return false;
                 if(depth == 0) {
 					var moves = this.nodes_map.has(node_value) ? `${this.nodes_map.get(node_value)},${index}` : index;
 					this.nodes_map.set(node_value, moves);
                 }
                 return true;
             });
-            if(depth == 0) {
-				if(typeof this.nodes_map.get(best) == 'string') {
-					var arr = this.nodes_map.get(best).split(',');
-					var rand = Math.floor(Math.random() * arr.length);
-					var ret = arr[rand];
-				} else {
-					ret = this.nodes_map.get(best);
-				}
-				callback(ret);
-				return ret;
-			}
-			return best;
+            
         }
         if(!maximizing){
-            let best = 100;
+            best = 100;
 			board.getAvailableMoves().every(index => {
 				let child = new Board(board.state.slice());
 				child.insert('O', index);
 				let node_value = this.getBestMove(child, true, callback, depth + 1,alpha,beta);
                 best = Math.min(best, node_value);
-                beta=Math.min(beta,node_value);
-                if(beta<=alpha)return false;
+                // beta=Math.min(beta,best);
+                // if(beta<=alpha)return false;
 				if(depth == 0) {
 					var moves = this.nodes_map.has(node_value) ? this.nodes_map.get(node_value) + ',' + index : index;
 					this.nodes_map.set(node_value, moves);
                 }
                 return true;
 			});
-			if(depth == 0) {
-				if(typeof this.nodes_map.get(best) == 'string') {
-					var arr = this.nodes_map.get(best).split(',');
-					var rand = Math.floor(Math.random() * arr.length);
-					var ret = arr[rand];
-				} else {
-					ret = this.nodes_map.get(best);
-				}
-				callback(ret);
-				return ret;
-			}
-			return best;
+			
         }
+        if(depth == 0) {
+            console.log(this.nodes_map);
+            if(typeof this.nodes_map.get(best) == 'string') {
+                var arr = this.nodes_map.get(best).split(',');
+                var rand = Math.floor(Math.random() * arr.length);
+                var ret = arr[rand];
+            } else {
+                ret = this.nodes_map.get(best);
+            }
+            callback(ret);
+            return ret;
+        }
+        return best;
     }
 }
 
