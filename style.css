@@ -72,10 +72,10 @@ table {
   font-family:'Permanent Marker', cursive;
 }
 
-/* img {
+img {
   max-width: 50%;
   vertical-align: middle;
-  border-style: none; } */
+  border-style: none; }
 
 #container {
   width: 100vw;
@@ -85,7 +85,10 @@ table {
   padding: 0px; 
   margin: 0px auto;
   background-color: #8a676e;
-  background-image: url("white.jpg");}
+  background: url("white.jpg");
+  background-repeat: no-repeat;
+  background-size: 50vw 100%;
+  }
   #container #sidebar_wrap {
     width: 35%;
     height: 100%;
