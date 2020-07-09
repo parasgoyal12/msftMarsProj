@@ -83,6 +83,7 @@ class Player{
     constructor(max_depth=-1){
         this.max_depth=max_depth;
         this.nodes_map=new Map();
+        
     }
     getBestMove(board,maximizing=true,callback=()=>{},depth=0,alpha=-100,beta=100){
         if(board.constructor.name !== "Board") throw('The first argument to the getBestMove method should be an instance of Board class.');
@@ -106,6 +107,7 @@ class Player{
 					var moves = this.nodes_map.has(node_value) ? `${this.nodes_map.get(node_value)},${index}` : index;
 					this.nodes_map.set(node_value, moves);
                 }
+                
                 return true;
             });
             
@@ -123,6 +125,7 @@ class Player{
 					var moves = this.nodes_map.has(node_value) ? this.nodes_map.get(node_value) + ',' + index : index;
 					this.nodes_map.set(node_value, moves);
                 }
+                
                 return true;
 			});
 			
@@ -220,7 +223,7 @@ document.querySelector('#newgame').addEventListener('click',()=>{
     if(selected_mode===0)
     p=new Player(depth_selected);
     hint_player=new Player(-1);
-    console.log(p.max_depth);
+    // console.log(p.max_depth);
     document.querySelectorAll(`.cell`).forEach(item=>item.classList.remove('winCol'));
     if(selected_mode===0&&turn!==1){
         // console.log(turn,selected_mode);
@@ -233,6 +236,7 @@ document.querySelector('#newgame').addEventListener('click',()=>{
         turn=1;
     }
     if(selected_mode===0){
+        $('.hint').tooltip().attr('data-original-title','Make a move on center or corners.'); 
         hint.style.display="block";
     }
     else{
@@ -240,7 +244,8 @@ document.querySelector('#newgame').addEventListener('click',()=>{
     }
     // }
 });
-
+let board_positions=[[0,'Top-Left'],[1,'Top Center'],[2,'Top Right'],[3,'Middle Left'],[4,'Middle Center'],[5,'Middle Right'],[6,'Bottom Left'],[7,'Bottom Center'],[8,'Bottom Right']];
+board_positions=new Map(board_positions);
 message_box=document.querySelector('.message');
 board_state=new Board();
 board.addEventListener('click',e=>{
@@ -256,12 +261,14 @@ board.addEventListener('click',e=>{
                         board.querySelector(`#cell${best}`).textContent='O';
                         turn=1;
                         message_box.textContent="X turn!";
+                        // console.log(p.next_nodes_map.keys());
                     });
                 }
                 hint_player.getBestMove(board_state,maximizing,best=>{
-                    hint.setAttribute('title',`${best}`);
-                    $('.hint').tooltip('dispose');
-                    $('.hint').tooltip(); 
+                    // hint.setAttribute('title',`${best}`);
+                    // $('.hint').tooltip('dispose');
+                    // console.log();
+                    $('.hint').tooltip().attr('data-original-title',` Go for ${board_positions.get(Number(best))}`); 
                 });
             }
             else{
