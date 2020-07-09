@@ -55,7 +55,7 @@ class Board{
         //return false otherwise
         return false;
     }
-    indicateWinner(result){
+    indicateWinner(result,msg){
         if(result.direction==='H'){
             Array.from(document.querySelector(`.ROW${result.row}`).children).forEach(item=>item.classList.add('winCol'));
         }
@@ -65,6 +65,10 @@ class Board{
         else{
             document.querySelectorAll(`.DIAG${result.row}`).forEach(item=>item.classList.add('winCol'));
         }
+        setTimeout(()=>{
+            msg.textContent="Click Start New Game to begin!!"
+        },3000);
+
     }
     insert(symbol, position) {
         if(position > 8 || this.state[position]) return false; //Cell is either occupied or does not exist
@@ -303,8 +307,9 @@ board.addEventListener('click',e=>{
         }
         if(board_state.isTerminal()){
             let result=board_state.isTerminal()
+            $('.hint').tooltip().attr('data-original-title',`Start a New Game!!`); 
             message_box.textContent=(result.winner==='draw')?"Game Drawn":`${result.winner} Wins!!`;
-            board_state.indicateWinner(board_state.isTerminal());
+            board_state.indicateWinner(board_state.isTerminal(),message_box);
             // console.log(board_state.isTerminal().direction);
         }
     }
