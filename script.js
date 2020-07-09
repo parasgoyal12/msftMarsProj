@@ -210,7 +210,7 @@ starting_player.addEventListener('click',e=>{
 
 let board_positions=[[0,'Top-Left'],[1,'Top Center'],[2,'Top Right'],[3,'Middle Left'],[4,'Middle Center'],[5,'Middle Right'],[6,'Bottom Left'],[7,'Bottom Center'],[8,'Bottom Right']];
 board_positions=new Map(board_positions);
-document.querySelector('#newgame').addEventListener('click',()=>{
+const newgame=function(){
     turn=Number(starting_player.querySelector('.active').getAttribute('data-value'));
     if(turn===1)message_box.textContent="X Turn";
     else message_box.textContent="O Turn";
@@ -250,9 +250,8 @@ document.querySelector('#newgame').addEventListener('click',()=>{
             $('.hint').tooltip().attr('data-original-title',` Go for ${board_positions.get(Number(best))}`); 
         });
     }
-    
-    // }
-});
+}
+document.querySelector('#newgame').addEventListener('click',newgame);
 
 message_box=document.querySelector('.message');
 board_state=new Board();
@@ -310,4 +309,4 @@ board.addEventListener('click',e=>{
         }
     }
 });
-
+document.addEventListener('DOMContentLoaded',newgame);
