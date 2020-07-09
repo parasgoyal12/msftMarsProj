@@ -128,7 +128,7 @@ class Player{
 			
         }
         if(depth == 0) {
-            console.log(this.nodes_map);
+            // console.log(this.nodes_map);
             if(typeof this.nodes_map.get(best) == 'string') {
                 var arr = this.nodes_map.get(best).split(',');
                 var rand = Math.floor(Math.random() * arr.length);
@@ -147,7 +147,7 @@ board=document.querySelector('.board');
 mode=document.querySelector('.modes_choices');
 depth=document.querySelector('.dpt-choices');
 starting_player=document.querySelector('.starting_player_choices');
-
+hint=document.querySelector('.hint');
 
 let selected_mode=0;
 let turn=1;
@@ -155,6 +155,7 @@ let maximizing=turn;
 let depth_selected=-1;
 p=new Player(depth_selected);
 board_state=new Board();
+hint_player=new Player(-1);
 mode.addEventListener('click',e=>{
     let temp=selected_mode;
     if(e.target.tagName==="LI"){
@@ -218,6 +219,7 @@ document.querySelector('#newgame').addEventListener('click',()=>{
     board_state=new Board();
     if(selected_mode===0)
     p=new Player(depth_selected);
+    hint_player=new Player(-1);
     console.log(p.max_depth);
     document.querySelectorAll(`.cell`).forEach(item=>item.classList.remove('winCol'));
     if(selected_mode===0&&turn!==1){
@@ -229,6 +231,12 @@ document.querySelector('#newgame').addEventListener('click',()=>{
         message_box.textContent="X Turn";
         // console.log("Hey");
         turn=1;
+    }
+    if(selected_mode===0){
+        hint.style.display="block";
+    }
+    else{
+        hint.style.display="None";
     }
     // }
 });
@@ -242,18 +250,26 @@ board.addEventListener('click',e=>{
             e.target.innerText='X';
             turn=0;
             message_box.textContent="O turn!!";
-            if(selected_mode===0)
-            p.getBestMove(board_state,!maximizing,best=>{ 
-                    board_state.insert('O',best);
-                    board.querySelector(`#cell${best}`).textContent='O';
-                    turn=1;
-                    message_box.textContent="X turn!";
+            if(selected_mode===0){
+                p.getBestMove(board_state,!maximizing,best=>{ 
+                        board_state.insert('O',best);
+                        board.querySelector(`#cell${best}`).textContent='O';
+                        turn=1;
+                        message_box.textContent="X turn!";
+                    });
+                }
+                hint_player.getBestMove(board_state,maximizing,best=>{
+                    hint.setAttribute('title',`${best}`);
+                    $('.hint').tooltip('dispose');
+                    $('.hint').tooltip(); 
                 });
             }
             else{
                 message_box.textContent="Error! Invalid Move"
                 // console.log("Error! Invalid Move")
             }
+            
+            
             // board_state.printFormattedBoard();
             // console.log(p.max_depth);
             
