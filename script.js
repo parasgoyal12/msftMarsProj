@@ -208,7 +208,8 @@ starting_player.addEventListener('click',e=>{
 });
 
 
-
+let board_positions=[[0,'Top-Left'],[1,'Top Center'],[2,'Top Right'],[3,'Middle Left'],[4,'Middle Center'],[5,'Middle Right'],[6,'Bottom Left'],[7,'Bottom Center'],[8,'Bottom Right']];
+board_positions=new Map(board_positions);
 document.querySelector('#newgame').addEventListener('click',()=>{
     turn=Number(starting_player.querySelector('.active').getAttribute('data-value'));
     if(turn===1)message_box.textContent="X Turn";
@@ -225,6 +226,13 @@ document.querySelector('#newgame').addEventListener('click',()=>{
     hint_player=new Player(-1);
     // console.log(p.max_depth);
     document.querySelectorAll(`.cell`).forEach(item=>item.classList.remove('winCol'));
+    if(selected_mode===0){
+        $('.hint').tooltip().attr('data-original-title','Make a move on center or corners.'); 
+        hint.style.display="block";
+    }
+    else{
+        hint.style.display="None";
+    }
     if(selected_mode===0&&turn!==1){
         // console.log(turn,selected_mode);
         let centers_and_corners=[0,2,4,6,8];
@@ -234,18 +242,18 @@ document.querySelector('#newgame').addEventListener('click',()=>{
         message_box.textContent="X Turn";
         // console.log("Hey");
         turn=1;
+        hint_player.getBestMove(board_state,maximizing,best=>{
+            // console.log(board_positions.get(Number(best)));
+            // hint.setAttribute('data-original-title',board_positions.get(Number(best)));
+            // $('.hint').tooltip('dispose');
+            // $('.hint').tooltip();
+            $('.hint').tooltip().attr('data-original-title',` Go for ${board_positions.get(Number(best))}`); 
+        });
     }
-    if(selected_mode===0){
-        $('.hint').tooltip().attr('data-original-title','Make a move on center or corners.'); 
-        hint.style.display="block";
-    }
-    else{
-        hint.style.display="None";
-    }
+    
     // }
 });
-let board_positions=[[0,'Top-Left'],[1,'Top Center'],[2,'Top Right'],[3,'Middle Left'],[4,'Middle Center'],[5,'Middle Right'],[6,'Bottom Left'],[7,'Bottom Center'],[8,'Bottom Right']];
-board_positions=new Map(board_positions);
+
 message_box=document.querySelector('.message');
 board_state=new Board();
 board.addEventListener('click',e=>{
