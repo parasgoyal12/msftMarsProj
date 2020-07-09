@@ -72,6 +72,17 @@ table {
   font-family:'Permanent Marker', cursive;
 }
 
+.hint-box {
+  margin-top: 90vh;
+  position: fixed;
+}
+
+.hint-box .hint{
+  font-size: 1.5vw;
+  font-family:'Permanent Marker', cursive;
+  color: #52a2b3;
+}
+
 img {
   max-width: 50%;
   vertical-align: middle;
