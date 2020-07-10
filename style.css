@@ -37,6 +37,10 @@ table tr td:last-child {
   color: #52a2b3;
 }
 
+.text-muted {
+ font-size: 16px ;
+}
+
 table {
   display: flex;
   background-color: #303133;
@@ -189,6 +193,10 @@ table {
   font-size: 3.5vw;
   padding-top: 3vh;
   padding-bottom: 1vh; 
+}
+
+.text-muted {
+ font-size: 8px ;
 }
 
 .hint-box {
