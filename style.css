@@ -1,19 +1,10 @@
 html, body {overflow: hidden}
 
-* {
-  box-sizing: border-box; }
-
 td {
 	border:  3px solid #fff;
   border-style: groove;
-/* 	height:  100px;
-	width:  100px; */
-	text-align:  center;
 	vertical-align:  middle;
-	font-family:  "Comic Sans MS", cursive, sans-serif;
-	font-size:  70px;
   cursor: pointer;
-  color:#ffffff;
 }
 
 table tr:first-child td {
@@ -35,7 +26,6 @@ table tr td:last-child {
 .cell{
   width: 9vw;
   height: 4vh;
-  /* margin: 10px; */
   font-size: 6vw;
   font-family: 'Permanent Marker', cursive;
   color: whitesmoke;
@@ -48,16 +38,6 @@ table tr td:last-child {
 }
 
 table {
-/*   width: 460px;
-  height: 460px;
-  float: left;
-  position: relative;
-  margin-top: 200px;
-  display: flex;
-  align-items: center;
-  justify-content: center; */
-
-  /* height: 50%; */
   display: flex;
   background-color: #303133;
   justify-content: center;
@@ -83,11 +63,6 @@ table {
   color: #52a2b3;
 }
 
-img {
-  max-width: 50%;
-  vertical-align: middle;
-  border-style: none; }
-
 #container {
   width: 100vw;
   height: 100vh;
@@ -99,30 +74,27 @@ img {
   background: url("white.jpg");
   background-repeat: no-repeat;
   background-size: 50vw 100%;
-  }
+}
   #container #sidebar_wrap {
     width: 35%;
     height: 100%;
     float: left;
     display: flex;
     margin-top: 20vh; 
-    /* align-items: center; */
     justify-content: center;
-    /* background-color: #ffffff; */
-     }
+  }
   #container #main{
     width: 65%;
     height: 100%;
     display: flex;
     background-color: #303133;
     justify-content: center;
-}
+  }
 
 #newgame {
   background-color: #52a2b3;
   border: none;
   padding: 1.5vh 1.5vw;
-  /* padding: 13px 26px; */
   border-radius: 1vw;
   color: #e4e4eb;
   font-family: 'Merienda One', cursive;
@@ -132,27 +104,29 @@ img {
   color: whitesmoke;
   width: 100%;
   margin-top: 2vh;
-  margin-bottom: 1vh;  }
+  margin-bottom: 1vh;  
+}
 
 #sidebar .field {
   width: 18vw;
-  margin-bottom: 3vh; }
+  margin-bottom: 3vh; 
+}
   #sidebar .field ul {
     margin: 0px auto;
     padding: 0px;
     list-style: none;
     border: 0.1vw solid #303133;
-    /* border-radius: 0.05vw; */
     overflow: hidden;
     font-size: 1vw;
-    font-family: 'Merienda One', cursive; }
+    font-family: 'Merienda One', cursive; 
+  }
     #sidebar .field ul li {
       float: left;
       padding: 1vh 1vw;
-      /* padding: 10px 15px; */
       border-right: 0.1vw solid #303133;
       cursor: pointer;
-      color: #303133; }
+      color: #303133; 
+    }
       #sidebar .field ul li:hover {
         background-color: #303133;
         color: #e4e4eb; }
@@ -188,135 +162,58 @@ img {
   zoom: 1.0;
 }
 
+/* For mobile view */
 @media screen and (max-width: 414px) and (max-height: 823px){
 
  #container {
-  width: 100vw;
-  height: 100vh;
-  overflow: hidden;
-  position: relative;
-  padding: 0px; 
-  margin: 0px auto;
-  /* background-color: #8a676e; */
-  background: url("white.jpg");
-  background-repeat: no-repeat;
   background-size: 100vw 40%;
   }
   #container #sidebar_wrap {
     width: 100%;
     height: 32%;
-    float: left;
-    display: flex;
     margin-top: 2vh; 
-    /* align-items: center; */
-    justify-content: center;
-    /* background-color: #ffffff; */
-     }
+  }
   #container #main{
     width: 100%;
     height: 68%;
-    display: flex;
-    background-color: #303133;
-    justify-content: center;
-   }
+  }
 
-  img {
-  max-width: 50%;
-  vertical-align: middle;
-  border-style: none; }
-
-  .cell {
+.cell {
   width: 20vw;
   height: 2vh;
-  /* margin: 10px; */
   font-size: 15vw;
-  font-family: 'Permanent Marker', cursive;
-  color: whitesmoke;
-  text-align: center;
   line-height: 14vh;
- }
+}
 
- .message {
+.message {
   font-size: 3.5vw;
-  color: #ffffff;
   padding-top: 3vh;
   padding-bottom: 1vh; 
-  text-align: center;
-  font-family:'Permanent Marker', cursive;
- }
+}
 
 .hint-box {
   margin-top: 58vh;
-  position: fixed;
- }
+}
 
 .hint-box .hint{
   font-size: 3vw;
-  font-family:'Permanent Marker', cursive;
-  color: #52a2b3;
 }
 
 #sidebar .field {
   width: 50vw;
   margin-bottom: 0.5vh; }
   #sidebar .field ul {
-    margin: 0px auto;
-    padding: 0px;
-    list-style: none;
-    border: 0.1vw solid #303133;
-    /* border-radius: 0.05vw; */
-    overflow: hidden;
     font-size: 2vw;
-    font-family: 'Merienda One', cursive; }
-    #sidebar .field ul li {
-      float: left;
-      padding: 1vh 1vw;
-      /* padding: 10px 15px; */
-      border-right: 0.1vw solid #303133;
-      cursor: pointer;
-      color: #303133; }
-      #sidebar .field ul li:hover {
-        background-color: #303133;
-        color: #e4e4eb; }
-      #sidebar .field ul li.active {
-        background-color: #5c5758;
-        color: #e4e4eb; }
-      #sidebar .field ul li:last-child {
-        border-right: none; }
-  #sidebar .field .starting_player_choices ul li {
-    width: 50%;
-    text-align: center; }
-  #sidebar .field .modes_choices ul li {
-    width: 50%;
-    text-align: center; }
-  #sidebar .field .depth_choices ul li {
-    width: 14.286%;
-    text-align: center; }
+  }
   #sidebar .field label {
-    font-weight: 800;
     font-size: 2.5vw;
     margin-bottom: 1vh;
-    display: block;
-    font-family: 'Merienda One', cursive;
-    color: #1685a1; }
+  }
 
   #newgame {
-    background-color: #52a2b3;
-    border: none;
-    padding: 1.5vh 1.5vw;
-    /* padding: 13px 26px; */
-    border-radius: 1vw;
-    color: #e4e4eb;
-    font-family: 'Merienda One', cursive;
-    cursor: pointer;
-    font-weight: 600;
     font-size: 3vw;
-    color: whitesmoke;
-    width: 100%;
     margin-top: 0.5vh;
     margin-bottom: 0vh;
   }
 
 }
-
-
