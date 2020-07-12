@@ -2,17 +2,6 @@ class Board{
     constructor(state=Array(9).fill('')){
         this.state=state;
     }
-    // printFormattedBoard() {
-    //     let formattedString = '';
-    //     this.state.forEach((cell, index) => {
-    //         formattedString += cell ? ` ${cell} |` : '   |';
-    //         if((index + 1) % 3 == 0)  {
-    //             formattedString = formattedString.slice(0,-1);
-    //             if(index < 8) formattedString += '\n\u2015\u2015\u2015 \u2015\u2015\u2015 \u2015\u2015\u2015\n';
-    //         }
-    //     });
-    //     console.log('%c' + formattedString, 'color: #6d4e42;font-size:16px');
-    // }
     isEmpty(){
         return this.state.every(cell=>!cell);
     }
@@ -135,7 +124,6 @@ class Player{
 			
         }
         if(depth == 0) {
-            // console.log(this.nodes_map);
             if(typeof this.nodes_map.get(best) == 'string') {
                 var arr = this.nodes_map.get(best).split(',');
                 var rand = Math.floor(Math.random() * arr.length);
@@ -171,12 +159,10 @@ mode.addEventListener('click',e=>{
             e.target.nextElementSibling.classList.remove('active');
             temp=1;
         }
-            // selected_mode=1;
         else{
             e.target.previousElementSibling.classList.remove('active');
             temp=0;
         }
-            // selected_mode=0;
     }
     if(temp===1){depth.style.display='none';starting_player.innerHTML='<ul><li data-value="1" class="active">Player&nbsp;[X]</li><li data-value="2">Player&nbsp;[O]</li></ul>';}
     else {
@@ -193,22 +179,17 @@ depth.addEventListener('click',e=>{
         elements.forEach(item=>{item.classList.remove('active');
     });
     e.target.classList.add('active');
-    // depth_selected=Number(e.target.getAttribute('data-value'));
     }
 });
 
 
 starting_player.addEventListener('click',e=>{
-    
     if( e.target.tagName==='LI'){
         elements=Array.from(e.target.parentElement.children);
         elements.forEach(item=>{item.classList.remove('active');
     });
     e.target.classList.add('active');
-    // turn=Number(e.target.getAttribute('data-value'));
     }
-    // clear_board();
-    
 });
 
 
@@ -228,20 +209,17 @@ const newgame=function(){
     if(selected_mode===0)
     p=new Player(depth_selected);
     hint_player=new Player(-1);
-    // console.log(p.max_depth);
     document.querySelectorAll(`.cell`).forEach(item=>item.classList.remove('winCol'));
     
     $('.hint').tooltip().attr('data-original-title','Make a move on center or corners.'); 
     hint.style.display="block";
     
     if(selected_mode===0&&turn!==1){
-        // console.log(turn,selected_mode);
         let centers_and_corners=[0,2,4,6,8];
         let first_choice=centers_and_corners[Math.floor(Math.random()*centers_and_corners.length)];
         board_state.insert('O',first_choice);
         board.querySelector(`#cell${first_choice}`).innerText='O';
         message_box.textContent="X Turn";
-        // console.log("Hey");
         turn=1;
         hint_player.getBestMove(board_state,maximizing,best=>{
             $('.hint').tooltip().attr('data-original-title',` Go for ${board_positions.get(Number(best))}`); 
@@ -265,28 +243,17 @@ board.addEventListener('click',e=>{
                             board.querySelector(`#cell${best}`).textContent='O';
                             turn=1;
                             message_box.textContent="X turn!";
-                            // console.log(p.next_nodes_map.keys());
                     });
                 }
                 hint_player.getBestMove(board_state,maximizing,best=>{
-                    // hint.setAttribute('title',`${best}`);
-                    // $('.hint').tooltip('dispose');
-                    // console.log();
                     $('.hint').tooltip().attr('data-original-title',` Go for ${board_positions.get(Number(best))}`); 
                 });
             }   
             else{
-                message_box.textContent="Error! Invalid Move"
-                // console.log("Error! Invalid Move")
+                message_box.textContent="Error! Invalid Move";
             }
-
-            
-            
-            // board_state.printFormattedBoard();
-            // console.log(p.max_depth);
-            
-           }
-         else { 
+        }
+        else{ 
             if(!board_state.isTerminal()&&board_state.insert('O',e.target.getAttribute('data-value'))){
                 if(selected_mode===1)
                     e.target.innerText='O';
@@ -294,16 +261,12 @@ board.addEventListener('click',e=>{
                 turn=1;
                 message_box.textContent="X turn!";
                 hint_player.getBestMove(board_state,!maximizing,best=>{
-                    // hint.setAttribute('title',`${best}`);
-                    // $('.hint').tooltip('dispose');
-                    // console.log();
                     $('.hint').tooltip().attr('data-original-title',` Go for ${board_positions.get(Number(best))}`); 
                 });
             }
             
             else{
                 message_box.textContent="Error!Invalid Move";
-                // console.log("Error");
             }
         }
         if(board_state.isTerminal()){
@@ -311,7 +274,6 @@ board.addEventListener('click',e=>{
             $('.hint').tooltip().attr('data-original-title',`Start a New Game!!`); 
             message_box.textContent=(result.winner==='draw')?"Game Drawn":`${result.winner} Wins!!`;
             board_state.indicateWinner(board_state.isTerminal(),message_box);
-            // console.log(board_state.isTerminal().direction);
         }
     }
 });
