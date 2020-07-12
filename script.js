@@ -230,13 +230,10 @@ const newgame=function(){
     hint_player=new Player(-1);
     // console.log(p.max_depth);
     document.querySelectorAll(`.cell`).forEach(item=>item.classList.remove('winCol'));
-    if(selected_mode===0){
-        $('.hint').tooltip().attr('data-original-title','Make a move on center or corners.'); 
-        hint.style.display="block";
-    }
-    else{
-        hint.style.display="None";
-    }
+    
+    $('.hint').tooltip().attr('data-original-title','Make a move on center or corners.'); 
+    hint.style.display="block";
+    
     if(selected_mode===0&&turn!==1){
         // console.log(turn,selected_mode);
         let centers_and_corners=[0,2,4,6,8];
@@ -247,10 +244,6 @@ const newgame=function(){
         // console.log("Hey");
         turn=1;
         hint_player.getBestMove(board_state,maximizing,best=>{
-            // console.log(board_positions.get(Number(best)));
-            // hint.setAttribute('data-original-title',board_positions.get(Number(best)));
-            // $('.hint').tooltip('dispose');
-            // $('.hint').tooltip();
             $('.hint').tooltip().attr('data-original-title',` Go for ${board_positions.get(Number(best))}`); 
         });
     }
@@ -263,16 +256,16 @@ board.addEventListener('click',e=>{
     if(e.target.tagName==='TD'){
         if(turn===1){
             if(!board_state.isTerminal()&&board_state.insert('X',e.target.getAttribute('data-value'))){
-            e.target.innerText='X';
-            turn=0;
-            message_box.textContent="O turn!!";
-            if(selected_mode===0){
-                p.getBestMove(board_state,!maximizing,best=>{ 
-                        board_state.insert('O',best);
-                        board.querySelector(`#cell${best}`).textContent='O';
-                        turn=1;
-                        message_box.textContent="X turn!";
-                        // console.log(p.next_nodes_map.keys());
+                e.target.innerText='X';
+                turn=0;
+                message_box.textContent="O turn!!";
+                if(selected_mode===0){
+                    p.getBestMove(board_state,!maximizing,best=>{ 
+                            board_state.insert('O',best);
+                            board.querySelector(`#cell${best}`).textContent='O';
+                            turn=1;
+                            message_box.textContent="X turn!";
+                            // console.log(p.next_nodes_map.keys());
                     });
                 }
                 hint_player.getBestMove(board_state,maximizing,best=>{
@@ -281,11 +274,12 @@ board.addEventListener('click',e=>{
                     // console.log();
                     $('.hint').tooltip().attr('data-original-title',` Go for ${board_positions.get(Number(best))}`); 
                 });
-            }
+            }   
             else{
                 message_box.textContent="Error! Invalid Move"
                 // console.log("Error! Invalid Move")
             }
+
             
             
             // board_state.printFormattedBoard();
@@ -297,8 +291,15 @@ board.addEventListener('click',e=>{
                 if(selected_mode===1)
                     e.target.innerText='O';
             
-            turn=1;
-            message_box.textContent="X turn!";}
+                turn=1;
+                message_box.textContent="X turn!";
+                hint_player.getBestMove(board_state,!maximizing,best=>{
+                    // hint.setAttribute('title',`${best}`);
+                    // $('.hint').tooltip('dispose');
+                    // console.log();
+                    $('.hint').tooltip().attr('data-original-title',` Go for ${board_positions.get(Number(best))}`); 
+                });
+            }
             
             else{
                 message_box.textContent="Error!Invalid Move";
